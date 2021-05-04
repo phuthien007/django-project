@@ -2,6 +2,19 @@
 {% load static %}
 {% block body %}
 
+{% ifequal error "no" %}
+<script>
+    alert('Logged In Successfully');
+    window.location=(" {% url 'profile' %} ");
+</script>
+{% endifequal %}
+
+{% ifequal error "yes" %}
+<script>
+    alert('Invalid Login Credentials, Try Again');
+
+</script>
+    {% endifequal %}
 <div class="container mt-5 " style="background-color: whitesmoke;">
     <div class="row">
         <div class="col-sm-6">
@@ -9,7 +22,7 @@
             <hr>
             <p>By Creating an account with our website, u will be able to move through the notes upload
                 and downloading process and more...</p>
-            <center><a href="#" class="btn btn-danger text-white mt-5 ">CREATE AN ACCOUNT</a></center>
+            <center><a href="{% url 'signup' %}" class="btn btn-danger text-white mt-5 ">CREATE AN ACCOUNT</a></center>
         </div>
         <div class="col-sm-6">
             <h2 class="text-center">USER LOGIN</h2>

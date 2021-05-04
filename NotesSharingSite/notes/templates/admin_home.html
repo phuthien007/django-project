@@ -1,0 +1,56 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+{% block body %}
+<style>
+.container1{
+    background-color: lightgrey;
+    border-radius: 8px;
+}
+h2,h4{
+    padding: 10px;
+}
+
+.mydiv:hover, .mydiv:active{
+    transform:translateY(-10px);
+}
+
+</style>
+
+<br/>
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="col-sm-3 text-center mydiv">
+            <div class="container1">
+                <h2 class="text-primary">{{p}}</h2>
+                <a href="{% url 'pending_notes' %}"><h4 class="text-dark">Pending Notes</h4></a>
+            </div>
+        </div>
+        <div class="col-sm-3 text-center mydiv">
+            <div class="container1">
+                <h2 class="text-primary">{{a}}</h2>
+                <a href="{% url 'accept_notes' %}"><h4 class="text-dark">Accepted Notes</h4></a>
+            </div>
+        </div>
+        <div class="col-sm-3 text-center mydiv">
+            <div class="container1">
+                <h2 class="text-primary">{{r}}</h2>
+                <a href="{% url 'reject_notes' %}"><h4 class="text-dark">Rejected Notes</h4></a>
+            </div>
+        </div>
+        <div class="col-sm-3 text-center mydiv">
+            <div class="container1">
+                <h2 class="text-primary">{{al}}</h2>
+                <a href="{% url 'all_notes' %}"><h4 class="text-dark">All Notes</h4></a>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<footer class="container mt-5 text-center">
+    <p style="font-size:30pt;color:red; font-weight: bold;">Copyright &copy;
+        <script>document.write(new Date().getFullYear());</script>
+        All Right Reserved <span style="color:brown">|</span> <span style="color:#006400">This website made with <i class="fas fa-heart text-warning">by</i> </span>
+        <a href="#" target="_blank">Tran Thien Phu</a> </p>
+</footer>
+
+{% endblock %}

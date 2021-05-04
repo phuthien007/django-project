@@ -16,13 +16,32 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from notes.views import *
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', about, name='about'),
     path('', index, name='home'),
-    path('/contact', contact, name='contact'),
-    path('/login', login, name='login'),
-    path('/login_admin', login_admin, name='login_admin'),
-
-]
+    path('contact/', contact, name='contact'),
+    path('login_user/', login_user, name='login'),
+    path('login_admin/', login_admin, name='login_admin'),
+    path('signup/', sign_up1, name= 'signup'),
+    path('admin_home/', admin_home, name='admin_home'),
+    path('logout/', Logout, name='logout'),
+    path('profile/', profile, name='profile'),
+    path('change_password/', change_password, name='change_password'),
+    path('edit_profile/', edit_profile, name='edit_profile'),
+    path('upload_notes/', upload_notes, name= 'upload_notes'),
+    path('view_mynotes/', view_mynotes, name= 'view_mynotes'),
+    path('delete_notes/<int:id>', delete_notes, name= 'delete_notes'),
+    path('delete_notes_admin/<int:id>', delete_notes_admin, name= 'delete_notes_admin'),
+    path('view_users/', view_users, name= 'view_users'),
+    path('delete_users/<int:id>', delete_user, name= 'delete_user'),
+    path('pending_notes/', pending_notes, name= 'pending_notes'),
+    path('accept_notes/', accept_notes, name= 'accept_notes'),
+    path('reject_notes/', reject_notes, name= 'reject_notes'),
+    path('all_notes/', all_notes, name= 'all_notes'),
+    path('assign_notes/<int:id>', assign_notes, name= 'assign_notes'),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
