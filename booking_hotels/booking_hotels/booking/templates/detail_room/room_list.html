@@ -8,112 +8,18 @@
     <div class="row">
         <div class="col-md-8">
             <div id="single_room_feat">
-                {% ifequal Category "Single Room" %}
+
                 <ul>
+                    {% for s in ser %}
                     <li>
                         <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                            <div class="tooltip-content">King size bed</div>
+                            <span class="tooltip-item"> <img src="{{ s.image.url }}" width="20%" height="20%" alt=""> </span>
+                            <div class="tooltip-content">{{ s.name }}</div>
                         </div>
                     </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
-                            <div class="tooltip-content">Shower</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                            <div class="tooltip-content">Plasma TV</div>
-                        </div>
-                    </li>
+                    {% endfor %}
                 </ul>
-                {% endifequal %}
-                {% ifequal Category "Double Room" %}
-                <ul>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                            <div class="tooltip-content">King size bed</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
-                            <div class="tooltip-content">Shower</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                            <div class="tooltip-content">Plasma TV</div>
-                        </div>
-                    </li>
-                </ul>
-                {% endifequal %}
-                {% ifequal Category "Suite Room" %}
-                <ul>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                            <div class="tooltip-content">King size bed</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
-                            <div class="tooltip-content">Shower</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                            <div class="tooltip-content">Plasma TV</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                            <div class="tooltip-content">Safe box</div>
-                        </div>
-                    </li>
-                </ul>
-                {% endifequal %}
-                {% ifequal Category "Double Room Luxury" %}
-                <ul>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                            <div class="tooltip-content">King size bed</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
-                            <div class="tooltip-content">Bathtub</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                            <div class="tooltip-content">Plasma TV</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_1_icon-15"></i></span>
-                            <div class="tooltip-content">Welcome bottle</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                            <div class="tooltip-content">Safe box</div>
-                        </div>
-                    </li>
-                </ul>
-                {% endifequal %}
+
             </div>
 
             <hr>
@@ -134,10 +40,14 @@
                             <h3>{{room.name}}</h3>
                             <p>{{ room.description }}</p>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
+                        <div class="row ml-6" style="display: flex;width: 100%;">
+                            <div class="col-md-8" style="width: 100%">
                                 <div class="price" style="color:red;margin-left:3%;">from
                                     <strong>${{room.price}}</strong> /night<small>Breakafst included</small></div>
+                            </div>
+                            <div class="col-md-3" style="width: 60%;right: -20%;">
+                                <input type="checkbox" name="room" id="{{room.name}}">
+                                <label for="{{room.name}}" class="btn btn-danger" data-toggle="modal">Booking</>
                             </div>
                         </div>
                     </div><!-- End review strip -->
@@ -157,45 +67,19 @@
                         review</a>
                 </div>
                 <div class="col-md-9">
-
                     <hr>
+                    {% for comment in comments %}
                     <div class="review_strip_single">
-                        <img src="{% static 'img/avatar_comment.png' %}" width="90px" height="80px" alt=""
+                        <img src="{% static 'img/avatar_comment.png' %}" width="20%" height="50%" alt=""
                              class="img-circle">
-                        <small> - 10 March 2015 -</small>
-                        <h4>Jhon Doe</h4>
+                        <small> - {{comment.create_date}} -</small>
+                        <h4> {{ comment.user.first_name }} {{ comment.user.last_name }} </h4>
+                        <br/>
                         <p>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum
-                            consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum
-                            primis in faucibus."
+                            {{ comment.comment }}
                         </p>
                     </div><!-- End review strip -->
-
-                    <div class="review_strip_single">
-                        <img src="{% static 'img/avatar_comment.png' %}" width="90px" height="80px" alt=""
-                             class="img-circle">
-                        <small> - 10 March 2015 -</small>
-                        <h4>Jhon Doe</h4>
-                        <p>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum
-                            consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum
-                            primis in faucibus."
-                        </p>
-                    </div><!-- End review strip -->
-
-                    <div class="review_strip_single last">
-                        <img src="{% static 'img/avatar_comment.png' %}" width="90px" height="80px" alt=""
-                             class="img-circle">
-                        <small> - 10 March 2015 -</small>
-                        <h4>Jhon Doe</h4>
-                        <p>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum
-                            consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum
-                            primis in faucibus."
-                        </p>
-
-                    </div><!-- End review strip -->
-
+                    {% endfor %}
                 </div>
             </div>
             <hr>
@@ -234,14 +118,13 @@
                 </div>
             </div>
         </div><!-- End col -->
-
-
         <div class="col-md-4" id="sidebar">
             <div class="theiaStickySidebar">
                 <div class="box_style_1">
                     <div id="message-booking"></div>
                     <form method="post" action="{% url 'booking_room' %}" id="check_avail">
                         {% csrf_token %}
+                        <input type="hidden" name="data" id="data">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
@@ -283,26 +166,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- End row -->
-                        <div class="row">
-                            <div class="col-md-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" name="name_booking" id="name_booking"
-                                           placeholder="Name and Last name">
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text" class="form-control" name="email_booking" id="email_booking"
-                                           placeholder="Your email">
-                                </div>
-                            </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <div class="form-group">
-                                <input type="submit" value="Book now" class="btn_full">
+                                <button type="submit" id="formBooking" onclick="addBooking()" value="Book now"
+                                        class="btn_full"> Booking Now
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -319,7 +188,6 @@
 
 </div><!-- End container -->
 
-
 <div id="dtBox"></div><!-- End datepicker -->
 
 
@@ -335,36 +203,18 @@
             <div class="modal-body">
                 <div id="message-review">
                 </div>
-                <form method="post" action="assets/review.php" name="review" id="review">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input name="name_review" id="name_review" type="text" placeholder="Your name"
-                                       class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input name="lastname_review" id="lastname_review" type="text"
-                                       placeholder="Your last name" class="form-control">
-                            </div>
-                        </div>
-                    </div>
+                <form method="post" action="{% url 'create_comment' %}" name="review" id="review">
+                    {% csrf_token %}
                     <!-- End row -->
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input name="email_review" id="email_review" type="email" placeholder="Your email"
-                                       class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="">
                             <div class="form-group">
                                 <select class="form-control" name="room_type_review" id="room_type_review">
                                     <option value="">Select room type</option>
-                                    <option value="Single room">Single Room</option>
+                                    <option value="Single Room">Single Room</option>
                                     <option value="Double Room">Double Room</option>
-                                    <option value="King double room">King Double Room</option>
+                                    <option value="Double Room Luxury">Double Room Luxury</option>
+                                    <option value="Suite Room">Suite Room</option>
                                 </select>
                             </div>
                         </div>
@@ -451,6 +301,23 @@
 {% block scripts %}
 <!-- SPECIFIC SCRIPTS -->
 <script>
+    function addBooking(){
+    listRoom = document.getElementsByName("room");
+    data = document.getElementById('data');
+    var str="";
+    for(var i=0; i< listRoom.length; i++){
+        if(listRoom[i].checked == true){
+            str = str+ " " +listRoom[i].id;
+        }
+    }
+    data.setAttribute("value",str);
+}
+
+
+</script>
+
+<script>
+
   $('.carousel_in').owlCarousel({
     center: true,
     items:1,
@@ -472,12 +339,18 @@
 
 
 
+
+
+
 </script>
 <script src="{% static 'js/theia-sticky-sidebar.js' %}"></script>
 <script>
     jQuery('#sidebar').theiaStickySidebar({
       additionalMarginTop: 80
     });
+
+
+
 
 </script>
 <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>

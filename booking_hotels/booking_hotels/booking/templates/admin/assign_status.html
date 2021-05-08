@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Admin- Show Room {% endblock %}
+{% block sub %} Assign Status {% endblock %}
+
+{% block body %}
+
+<div class="container mt-5 " style="background-color: whitesmoke;">
+    <h2 class="text-center">ASSIGN STATUS </h2>
+    <hr>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">Room ID</label>
+        <input type="text" name="notesId" class="form-control" value="{{notes.id}}" readonly>
+        <label for="">Status</label>
+        <select name="status" class="form-control" id="">
+            <option value="Accept"> Accept</option>
+            <option value="Reject"> Reject</option>
+        </select>
+        <br/>
+        <input type="submit" value="Submit" class="form-control btn btn-success">
+    </form>
+    <br/>
+    <br/>
+
+</div>
+
+{% ifequal error 'no' %}
+<script>
+    alert("Status Updated Successfully")
+    window.location=('{% url "admin_room" %}');
+</script>
+
+
+{% endifequal %}
+
+{% ifequal error 'yes' %}
+<script>
+    alert("Something went wrong, Try Again");
+</script>
+{% endifequal %}
+
+{% endblock %}

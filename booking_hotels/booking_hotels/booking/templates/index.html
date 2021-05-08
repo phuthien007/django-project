@@ -44,21 +44,21 @@
 
 {% endblock %}
 
+{% for category in categories %}
 <div class="container_styled_1">
     <div class="container margin_60">
         <div class="row">
             <div class="col-md-5 col-md-offset-1">
                 <figure class="room_pic"><a href="#"><img src="{% static 'img/room_home_1.jpg' %}" alt=""
                                                           class="img-responsive"></a><span class="wow zoomIn"
-                                                                                           data-wow-delay="0.2s"><sup>$</sup>140<small>Per night</small></span>
+                                                                                           data-wow-delay="0.2s" style="width:35%;"><sup>$</sup>{{category.price_randian}}<small>Per night</small></span>
                 </figure>
             </div>
             <div class="col-md-4 col-md-offset-1">
                 <div class="room_desc_home">
-                    <h3>Single Room </h3>
+                    <h3>{{category.name}}</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                        {{category.description}}
                     </p>
                     <ul>
                         <li>
@@ -86,179 +86,14 @@
                             </div>
                         </li>
                     </ul>
-                    <a href="#0" class="btn_1_outline">Read more</a>
+                    <a href="{% url 'category_room_list' %}" class="btn_1_outline">Read more</a>
                 </div><!-- End room_desc_home -->
             </div>
         </div><!-- End row -->
     </div><!-- End container -->
 </div><!-- End container_styled_1 -->
 
-<div class="container margin_60">
-    <div class="row">
-        <div class="col-md-5 col-md-offset-1 col-md-push-5">
-            <figure class="room_pic left"><a href="#"><img src="{% static 'img/room_home_3.jpg' %}" alt=""
-                                                           class="img-responsive"></a><span class="wow zoomIn"
-                                                                                            data-wow-delay="0.2s"><sup>$</sup>180<small>Per night</small></span>
-            </figure>
-        </div>
-        <div class="col-md-4 col-md-offset-1 col-md-pull-6">
-            <div class="room_desc_home">
-                <h3>Double Room </h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                </p>
-                <ul>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                <div class="tooltip-content">
-                                    King size bed
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
-                                <div class="tooltip-content">
-                                    Shower
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                <div class="tooltip-content">
-                                    Plasma TV
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                <a href="#0" class="btn_1_outline">Read more</a>
-            </div><!-- End room_desc_home -->
-        </div>
-    </div><!-- End row -->
-</div><!-- End container -->
-
-<div class="container_styled_1">
-    <div class="container margin_60">
-        <div class="row">
-            <div class="col-md-5 col-md-offset-1">
-                <figure class="room_pic"><a href="#"><img src="{% static 'img/room_home_2.jpg' %}" alt=""
-                                                          class="img-responsive"></a><span class="wow zoomIn"
-                                                                                           data-wow-delay="0.2s"><sup>$</sup>200<small>Per night</small></span>
-                </figure>
-            </div>
-            <div class="col-md-4 col-md-offset-1">
-                <div class="room_desc_home">
-                    <h3>Suite Room </h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                    </p>
-                    <ul>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                <div class="tooltip-content">
-                                    King size bed
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
-                                <div class="tooltip-content">
-                                    Bathtub
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                <div class="tooltip-content">
-                                    Plasma TV
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                                <div class="tooltip-content">
-                                    Safe box
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="#0" class="btn_1_outline">Read more</a>
-                </div><!-- End room_desc_home -->
-            </div>
-        </div><!-- End row -->
-    </div><!-- End container -->
-</div><!-- End container_styled_1 -->
-
-<div class="container margin_60">
-    <div class="row">
-        <div class="col-md-5 col-md-offset-1 col-md-push-5">
-            <figure class="room_pic left"><a href="#"><img src="{% static 'img/room_home_3.jpg' %}" alt=""
-                                                           class="img-responsive"></a><span class="wow zoomIn"
-                                                                                            data-wow-delay="0.2s"><sup>$</sup>220<small>Per night</small></span>
-            </figure>
-        </div>
-        <div class="col-md-4 col-md-offset-1 col-md-pull-6">
-            <div class="room_desc_home">
-                <h3>Double Room Luxury </h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                </p>
-                <ul>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                <div class="tooltip-content">
-                                    King size bed
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
-                                <div class="tooltip-content">
-                                    Bathtub
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                <div class="tooltip-content">
-                                    Plasma TV
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_1_icon-15"></i></span>
-                                <div class="tooltip-content">
-                                    Welcome bottle
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                                <div class="tooltip-content">
-                                    Safe box
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                <a href="#0" class="btn_1_outline">Read more</a>
-            </div><!-- End room_desc_home -->
-        </div>
-    </div><!-- End row -->
-</div><!-- End container -->
+{% endfor %}
 <section class="promo_full">
     <div class="promo_full_wp">
         <div>
@@ -267,62 +102,20 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="carousel_testimonials">
+                            {% for c in comments %}
                             <div>
                                 <div class="box_overlay">
                                     <div class="pic">
                                         <figure><img src="{% static 'img/testimonial_1.jpg' %}" alt=""
                                                      class="img-circle"></figure>
-                                        <h4>Roberta<small>20 May 2021</small></h4>
+                                        <h4>{{c.user.first_name}} {{c.user.last_name}}<small>{{c.create_date}}</small></h4>
                                     </div>
                                     <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas
-                                        elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere
-                                        civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
+                                        {{ c.comment }}
+                                         </div>
                                 </div><!-- End box_overlay -->
                             </div>
-                            <div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="{% static 'img/testimonial_1.jpg' %}" alt=""
-                                                     class="img-circle"></figure>
-                                        <h4>Roberta<small>20 May 2021</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas
-                                        elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere
-                                        civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div>
-                            <div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="{% static 'img/testimonial_1.jpg' %}" alt=""
-                                                     class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas
-                                        elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere
-                                        civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div>
-                            <div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="{% static 'img/testimonial_1.jpg' %}" alt=""
-                                                     class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas
-                                        elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere
-                                        civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div>
+                            {% endfor %}
                         </div><!-- End carousel_testimonials -->
                     </div><!-- End col-md-8 -->
                 </div><!-- End row -->

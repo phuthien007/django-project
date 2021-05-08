@@ -74,6 +74,7 @@
                         <li><a href="/contact">Contacts</a></li>
                         <li><a href="/about">About Us</a></li>
                         {% if request.user.is_authenticated %}
+                                {% if not request.user.is_staff %}
                                 <li class="submenu">
                                 <div class="show-submenu"><i class="icon-user"></i> {{request.user.first_name}}  {{request.user.last_name}}<i class="icon-down-open-mini"></i></div>
                                 <ul>
@@ -83,6 +84,17 @@
                                     <li><a href="{% url 'logout' %}">Logout</a></li>
                                 </ul>
                                 </li>
+                                {% else %}
+                                    <li class="submenu">
+                                <div class="show-submenu"><i class="icon-user"></i> {{request.user.first_name}}  {{request.user.last_name}}<i class="icon-down-open-mini"></i></div>
+                                <ul>
+                                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                                    <li><a href="{% url 'admin_room' %}">Room List</a></li>
+                                    <li><a href="{% url 'admin_booking' %}">Booking</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                </ul>
+                                </li>
+                                {% endif %}
                         {% else %}
                         <li><a href="{% url 'login_user' %}">Login</a></li>
                         <li><a href="{% url 'sign_up' %}">Sign Up</a></li>

@@ -19,5 +19,14 @@ urlpatterns = [
     path('my_profile/', profile, name='profile'),
     path('change_password/', change_password, name='change_password'),
     path('my_rooms/', my_room, name='my_room'),
-    path('booking_room/',booking_room,name='booking_room'),
+    path('booking_room/', booking_room, name='booking_room'),
+    path('create_comment/', create_comment, name='create_comment'),
+    path('cancel_booking/', cancel_booking, name='cancel_booking'),
+    # adminstration
+    path('admin_room/', admin_room, name='admin_room'),
+    path('admin_room/delete/<int:id>', admin_room_delete, name='admin_room_delete'),
+    path('assign_rooms/<int:id>', assign_rooms, name='assign_rooms'),
+    path('admin_booking/', admin_booking, name='admin_booking'),
+    path('admin_booking/delete/<int:id>', admin_booking_room_delete, name='admin_booking_room_delete'),
+
 ]
