@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from .models import *
 from datetime import date, datetime
@@ -9,6 +10,8 @@ from datetime import date, datetime
 
 # Create your views here.
 # url home page
+
+
 def index(request):
     category_lst = Categories.objects.all()
     comments = Comments.objects.order_by('-create_date')[:5]
@@ -184,6 +187,7 @@ def booking_room(request):
         check_out_date = request.POST['check_out']
         adults = (request.POST['adults'])
         children = (request.POST['children'])
+        voucher_code = request.POST['voucher_code']
         try:
             check_in_date = format_date(check_in_date)
             check_out_date = format_date(check_out_date)
@@ -193,6 +197,19 @@ def booking_room(request):
         adults = 0 if (adults == '') else int(adults)
         children = 0 if (children == '') else int(children)
         my_room = Booking.objects.filter(user=request.user)
+        voucher = Voucher.objects.filter(code = voucher_code).first()
+        if voucher != ' ' and voucher is not None:
+            if voucher.qty > 0:
+                voucher.qty-=1
+                voucher.save()
+            elif voucher.create_date > date.today():
+                voucher_code = ' '
+            elif voucher.end_date < date.today():
+                voucher_code = ' '
+            else:
+                voucher_code = ' '
+        else:
+            voucher_code = ' '
         if data is not None and adults != 0  and (adults + children) <=10 :
             data = data.split()
             for item in data:
@@ -202,7 +219,7 @@ def booking_room(request):
                     room.status = 2
                     room.save()
                     a = Booking.objects.create(room=room, user=request.user, number_adults=adults, number_children=children,
-                                           arival_date=check_in_date, departure_date=check_out_date)
+                                           arival_date=check_in_date, departure_date=check_out_date, voucher_code = voucher_code)
                     a.save()
         my_room = Booking.objects.filter(user=request.user)
         return render(request, 'user/my_rooms.html', {'room_list': my_room})
@@ -308,3 +325,53 @@ def admin_booking_room_delete(request,id):
     except:
         pass
     return redirect('admin_booking')
+
+def total_bill(request,id):
+    if not request.user.is_staff:
+        return redirect('/admin')
+    b1 = Booking.objects.filter(id = id).first()
+    a = int(str(b1.departure_date - b1.arival_date).split()[0])
+    if( a<0 ):
+        return redirect('admin_booking')
+    else:
+        user = b1.user
+        room = b1.room
+        total_price = a * int(room.price)
+        voucher = Voucher.objects.filter(code = b1.voucher_code).first()
+        if voucher != ' ' and voucher is not None:
+            total_price-= voucher.discount * a * int(room.price)
+        return render(request, 'admin/total_bill.html',{"user":user,"room":room,"total_price":total_price})
+
+def accept_bill(request):
+    if not request.user.is_staff:
+        return redirect('/admin')
+    if request.method == 'POST':
+        room = Rooms.objects.filter(name = request.POST['room_name']).first()
+        user = User.objects.filter(username=request.POST['username']).first()
+        b = Booking.objects.filter(room = room, user= user).first()
+        b.delete()
+        room.status = 0
+        room.save()
+        return redirect(admin_booking)
+
+
+
+EMAIL_HOST_USER = 'phailamsaonana@gmail.com'
+def send_notification(request):
+    if request.method == 'POST':
+        first_name = (request.POST['name_contact'])
+        last_name = (request.POST['lastname_contact'])
+        email  = request.POST['email_contact']
+        phone_contact = request.POST['phone_contact']
+        message_contact = request.POST['message_contact']
+        mgs = f'''
+            From:  {email} 
+            Fullname: {first_name} {last_name}
+            Phone: {phone_contact}
+            Send Message: {message_contact}
+        '''
+        send_mail("A new Customer",
+                  "Your Message Sent", EMAIL_HOST_USER, [email], fail_silently=False)
+        send_mail("A new Customer",
+                  mgs, EMAIL_HOST_USER, [EMAIL_HOST_USER], fail_silently=False)
+        return render(request, 'success.html')

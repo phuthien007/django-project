@@ -25,7 +25,7 @@ SECRET_KEY = '^bvbojgu-+wtdem8q9u(7&4(wv%nae%2ykv#m!3gs6e7tjv&%h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -121,3 +121,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 IMAGE_URL = '/images/'
 IMAGE_ROOT = os.path.join(BASE_DIR,'images')
+
+
+#DataFlair
+# setup config
+username_email = 'phailamsaonana@gmail.com'
+pass_email = 'Nhutaikhoan'
+
+
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = username_email
+EMAIL_HOST_PASSWORD = pass_email

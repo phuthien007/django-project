@@ -48,7 +48,9 @@ class Booking(models.Model):
     number_children = models.IntegerField(default=0)
     arival_date = models.DateField()
     departure_date = models.DateField()
+    voucher_code = models.CharField(max_length=20, default=' ')
     UniqueConstraint(fields=['user', 'room'], name='unique_user_booking')
+
 
     def __str__(self):
         return self.user.first_name + ' ' + self.user.last_name + '-' + self.room.name
@@ -75,3 +77,15 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.user.username + ' comment: ' + self.category.name
+
+class Voucher(models.Model):
+    code = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=100)
+    discount = models.FloatField(default=0)
+    qty = models.IntegerField(default=0)
+    description = models.CharField(max_length=100, null=True)
+    create_date = models.DateField(default= date.today())
+    end_date = models.DateField(null=True)
+
+    def __str__(self):
+        return self.name + self.qty

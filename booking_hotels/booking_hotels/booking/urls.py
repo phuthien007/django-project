@@ -28,5 +28,7 @@ urlpatterns = [
     path('assign_rooms/<int:id>', assign_rooms, name='assign_rooms'),
     path('admin_booking/', admin_booking, name='admin_booking'),
     path('admin_booking/delete/<int:id>', admin_booking_room_delete, name='admin_booking_room_delete'),
-
+    path('admin_booking/total_bill/<int:id>', total_bill, name='total_bill'),
+    path('admin_booking/accept_bill/', accept_bill, name='accept_bill'),
+    path('send_notification/',send_notification,name= 'send_notification'),
 ]
