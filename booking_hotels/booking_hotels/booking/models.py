@@ -19,7 +19,7 @@ class Categories(models.Model):
 
 
 # model room
-class Rooms(models.Model):
+class Room(models.Model):
     name = models.CharField(max_length=200, unique=True)
     category = models.ForeignKey('Categories', on_delete=models.CASCADE)
     price = models.FloatField(default=0)
@@ -43,12 +43,12 @@ class Signup(models.Model):
 # model book a room
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    room = models.ForeignKey(Rooms, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     number_adults = models.IntegerField(default=0)
     number_children = models.IntegerField(default=0)
     arival_date = models.DateField()
     departure_date = models.DateField()
-    voucher_code = models.CharField(max_length=20, default=' ')
+    voucher_code = models.CharField(max_length=20, default=' ', null=True)
     UniqueConstraint(fields=['user', 'room'], name='unique_user_booking')
 
 
@@ -58,8 +58,8 @@ class Booking(models.Model):
 
 # model service in a category
 
-class service(models.Model):
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+class Service(models.Model):
+
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/service')
     description = models.CharField(max_length=200, null=True)
@@ -68,7 +68,14 @@ class service(models.Model):
         return self.name
 
 
-class Comments(models.Model):
+class Category_service(models.Model):
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, on_delete= models.CASCADE)
+
+    def __str__(self):
+        return self.category.name + ' '  + self.service.name
+
+class Comment(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     evaluation = models.CharField(max_length=200, default='')

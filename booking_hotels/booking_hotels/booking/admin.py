@@ -7,10 +7,11 @@ class AdminBooking(admin.ModelAdmin):
     list_display = [ "user",'room']
 
 
-admin.site.register(Rooms)
+admin.site.register(Room)
 admin.site.register(Signup)
 admin.site.register(Categories)
 admin.site.register(Booking,AdminBooking)
-admin.site.register(Comments)
-admin.site.register(service)
+admin.site.register(Comment)
+admin.site.register(Service)
+admin.site.register(Category_service)
 admin.site.register(Voucher)

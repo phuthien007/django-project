@@ -4,6 +4,12 @@
 {% block sub %} Room List {% endblock %}
 {% block body %}
 <h1 class="main_title_in">My Room List</h1>
+
+{% if error == "yes" %}
+<script>
+   alert("Something Went Error");
+</script>
+{% endif %}
 <div class="container add_bottom_60">
 
     <div class="row">

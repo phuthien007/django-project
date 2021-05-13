@@ -14,7 +14,7 @@ from datetime import date, datetime
 
 def index(request):
     category_lst = Categories.objects.all()
-    comments = Comments.objects.order_by('-create_date')[:5]
+    comments = Comment.objects.order_by('-create_date')[:5]
     return render(request, 'index.html',{"categories": category_lst, "comments":comments})
 
 
@@ -25,10 +25,10 @@ def category_room_list(request):
     Category2 = Categories.objects.get(name='Double Room Luxury')
     Category3 = Categories.objects.get(name='Single Room')
     Category4 = Categories.objects.get(name='Suite Room')
-    service1 = service.objects.filter( category = Category1 )
-    service2 = service.objects.filter( category = Category2 )
-    service3 = service.objects.filter(category=Category3)
-    service4 = service.objects.filter(category=Category4)
+    service1 = Category_service.objects.filter( category = Category1 )
+    service2 = Category_service.objects.filter( category = Category2 )
+    service3 = Category_service.objects.filter(category=Category3)
+    service4 = Category_service.objects.filter(category=Category4)
     category_lst = Categories.objects.all()
     return render(request, 'category_room_list.html', {"categories": category_lst, "ser1": service1,"ser2": service2,"ser3": service3,"ser4": service4})
 
@@ -38,44 +38,82 @@ def category_room_list(request):
 def double_room_list(request):
 
     Category = Categories.objects.get(name='Double Room')
-    service1 = service.objects.filter(category=Category)
-    double_lst = Category.rooms_set.filter(status=0)
-    comments = Comments.objects.filter(category = Category).order_by('-create_date')[:5]
+    service1 = Category_service.objects.filter(category=Category)
+    double_lst = Category.room_set.all()
+    double_room=[]
+    for room in double_lst:
+        c = 0
+        booking= Booking.objects.filter(room = room)
+        for b in booking:
+            if b.departure_date >= date.today() and b.arival_date <= date.today():
+                c+=1
+        if c == 0:
+            double_room.append(room)
+
+
+    comments = Comment.objects.filter(category = Category).order_by('-create_date')[:5]
     return render(request, 'detail_room/room_list.html',
-                  {"double_room_list": double_lst, "Category": Category.name, "ser": service1, "comments": comments})
+                  {"double_room_list": double_room, "Category": Category.name, "ser": service1, "comments": comments})
 
 
 # list double luxury room
 @login_required(login_url='/login_user/')
 def double_room_luxury_list(request):
     Category = Categories.objects.get(name='Double Room Luxury')
-    service1 = service.objects.filter(category=Category)
-    double_lst = Category.rooms_set.filter(status=0)
-    comments = Comments.objects.filter(category=Category).order_by('-create_date')[:5]
+    service1 = Category_service.objects.filter(category=Category)
+    double_lst = Category.room_set.all()
+    double_room_luxury = []
+    for room in double_lst:
+        c = 0
+        booking = Booking.objects.filter(room=room)
+        for b in booking:
+            if b.departure_date >= date.today() and b.arival_date <= date.today():
+                c += 1
+        if c == 0:
+            double_room_luxury.append(room)
+    comments = Comment.objects.filter(category=Category).order_by('-create_date')[:5]
     return render(request, 'detail_room/room_list.html',
-                  {"double_room_list": double_lst, "Category": Category.name, "ser": service1, "comments": comments})
+                  {"double_room_list": double_room_luxury, "Category": Category.name, "ser": service1, "comments": comments})
 
 
 # list single room
 @login_required(login_url='/login_user/')
 def single_room_list(request):
     Category = Categories.objects.get(name='Single Room')
-    service1 = service.objects.filter(category=Category)
-    double_lst = Category.rooms_set.filter(status=0)
-    comments = Comments.objects.filter(category=Category).order_by('-create_date')[:5]
+    service1 = Category_service.objects.filter(category=Category)
+    double_lst = Category.room_set.all()
+    single_room = []
+    for room in double_lst:
+        c = 0
+        booking = Booking.objects.filter(room=room)
+        for b in booking:
+            if b.departure_date >= date.today() and b.arival_date <= date.today():
+                c += 1
+        if c == 0:
+            single_room.append(room)
+    comments = Comment.objects.filter(category=Category).order_by('-create_date')[:5]
     return render(request, 'detail_room/room_list.html',
-                  {"double_room_list": double_lst, "Category": Category.name, "ser": service1, "comments": comments})
+                  {"double_room_list": single_room, "Category": Category.name, "ser": service1, "comments": comments})
 
 
 # list suite room
 @login_required(login_url='/login_user/')
 def suite_room_list(request):
     Category = Categories.objects.get(name='Suite Room')
-    service1 = service.objects.filter(category=Category)
-    double_lst = Category.rooms_set.filter(status=0)
-    comments = Comments.objects.filter(category=Category).order_by('-create_date')[:5]
+    service1 = Category_service.objects.filter(category=Category)
+    double_lst = Category.room_set.all()
+    suite_room = []
+    for room in double_lst:
+        c = 0
+        booking = Booking.objects.filter(room=room)
+        for b in booking:
+            if b.departure_date >= date.today() and b.arival_date <= date.today():
+                c += 1
+        if c == 0:
+            suite_room.append(room)
+    comments = Comment.objects.filter(category=Category).order_by('-create_date')[:5]
     return render(request, 'detail_room/room_list.html',
-                  {"double_room_list": double_lst, "Category": Category.name, "ser":service1, "comments": comments})
+                  {"double_room_list": suite_room, "Category": Category.name, "ser":service1, "comments": comments})
 
 
 # to login
@@ -166,7 +204,7 @@ def change_password(request):
 @login_required(login_url='/login_user/')
 def my_room(request):
     my_room = Booking.objects.filter(user=request.user)
-    return render(request, 'user/my_rooms.html', {'room_list': my_room})
+    return render(request, 'user/my_rooms.html', {'room_list': my_room,"error":"no"})
 
 # format datetime booking
 def format_date(datetime):
@@ -210,11 +248,18 @@ def booking_room(request):
                 voucher_code = ' '
         else:
             voucher_code = ' '
+
         if data is not None and adults != 0  and (adults + children) <=10 :
             data = data.split()
             for item in data:
-                room = Rooms.objects.filter(name=item).first()
+                room = Room.objects.filter(name=item).first()
                 o_room = Booking.objects.filter(user = request.user, room = room).first()
+                booking = Booking.objects.filter(room=room)
+                for b in booking:
+                    if (str(b.departure_date) > check_in_date and str(b.arival_date) < check_in_date) or \
+                            (str(b.departure_date) > check_out_date and str(b.arival_date) < check_out_date) or\
+                            (str(b.arival_date) > check_in_date and str(b.departure_date) < check_out_date):
+                        return render(request, 'user/my_rooms.html', {'room_list': my_room,"error":"yes"})
                 if o_room is None:
                     room.status = 2
                     room.save()
@@ -222,9 +267,7 @@ def booking_room(request):
                                            arival_date=check_in_date, departure_date=check_out_date, voucher_code = voucher_code)
                     a.save()
         my_room = Booking.objects.filter(user=request.user)
-        return render(request, 'user/my_rooms.html', {'room_list': my_room})
-
-
+        return render(request, 'user/my_rooms.html', {'room_list': my_room,"error":"no"})
 
 
 @login_required(login_url='/login_user/')
@@ -244,7 +287,7 @@ def create_comment(request):
             # print("errror1")
             return redirect('category_room_list')
         if room_type_review != '':
-            tmp = Comments.objects.create(category = category, user = request.user, evaluation = evals, comment = review_text)
+            tmp = Comment.objects.create(category = category, user = request.user, evaluation = evals, comment = review_text)
             url_name = '_'.join([ i.lower() for i in room_type_review.split() ])+"_list"
             return  redirect(url_name)
         # print("error2")
@@ -255,7 +298,7 @@ def create_comment(request):
 def cancel_booking(request):
     if request.method == 'POST':
         room_name = request.POST['cancel_booking']
-        room = Rooms.objects.filter(name = room_name).first()
+        room = Room.objects.filter(name = room_name).first()
         b= Booking.objects.filter(room = room).first()
         try:
             b.delete()
@@ -272,7 +315,7 @@ def cancel_booking(request):
 def admin_room(request):
     if not request.user.is_staff:
         return redirect('/admin')
-    rooms = Rooms.objects.all()
+    rooms = Room.objects.all()
     return render(request,'admin/admin_room.html',{"rooms":rooms})
 
 
@@ -281,7 +324,7 @@ def admin_room_delete(request,id):
     if not request.user.is_staff:
         return redirect('/admin')
     try:
-        room = Rooms.objects.get(pk=id)
+        room = Room.objects.get(pk=id)
         room.delete()
     except:
         pass
@@ -293,7 +336,7 @@ def assign_rooms(request,id):
     if not request.user.is_staff:
         return redirect('login_user')
 
-    rooms= Rooms.objects.get(id= id)
+    rooms= Room.objects.get(id= id)
     error = ""
     if request.method == 'POST':
         s = request.POST['status']
@@ -346,7 +389,7 @@ def accept_bill(request):
     if not request.user.is_staff:
         return redirect('/admin')
     if request.method == 'POST':
-        room = Rooms.objects.filter(name = request.POST['room_name']).first()
+        room = Room.objects.filter(name = request.POST['room_name']).first()
         user = User.objects.filter(username=request.POST['username']).first()
         b = Booking.objects.filter(room = room, user= user).first()
         b.delete()

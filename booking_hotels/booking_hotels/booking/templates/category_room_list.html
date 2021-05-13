@@ -16,7 +16,7 @@
                     <div class="room_desc clearfix" onclick="location.href='double_room_list';">
                         {% endifequal %}
                         {% ifequal category.name "Suite Room" %}
-                        <
+
                         <div class="room_desc clearfix" onclick="location.href='suite_room_list';">
                             {% endifequal %}
                             {% ifequal category.name "Double Room Luxury" %}
@@ -35,9 +35,9 @@
                                         {% for s in ser3 %}
                                         <li style="width:100%;">
                                             <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"> <img src="{{ s.image.url }}" width="50%"
+                                                <span class="tooltip-item"> <img src="{{ s.service.image.url }}" width="50%"
                                                                                  height="50%" alt=""> </span>
-                                                <div class="tooltip-content">{{ s.name }}</div>
+                                                <div class="tooltip-content">{{ s.service.name }}</div>
                                             </div>
                                         </li>
                                         {% endfor %}
@@ -48,9 +48,9 @@
                                         {% for s in ser1 %}
                                         <li style="width:100%;">
                                             <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"> <img src="{{ s.image.url }}" width="50%"
+                                                <span class="tooltip-item"> <img src="{{ s.service.image.url }}" width="50%"
                                                                                  height="50%" alt=""> </span>
-                                                <div class="tooltip-content">{{ s.name }}</div>
+                                                <div class="tooltip-content">{{ s.service.name }}</div>
                                             </div>
                                         </li>
                                         {% endfor %}
@@ -61,9 +61,9 @@
                                         {% for s in ser4 %}
                                         <li style="width:100%;">
                                             <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"> <img src="{{ s.image.url }}" width="50%"
+                                                <span class="tooltip-item"> <img src="{{ s.service.image.url }}" width="50%"
                                                                                  height="50%" alt=""> </span>
-                                                <div class="tooltip-content">{{ s.name }}</div>
+                                                <div class="tooltip-content">{{ s.service.name }}</div>
                                             </div>
                                         </li>
                                         {% endfor %}
@@ -74,9 +74,9 @@
                                         {% for s in ser2 %}
                                         <li style="width:100%;">
                                             <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"> <img src="{{ s.image.url }}" width="50%"
+                                                <span class="tooltip-item"> <img src="{{ s.service.image.url }}" width="50%"
                                                                                  height="50%" alt=""> </span>
-                                                <div class="tooltip-content">{{ s.name }}</div>
+                                                <div class="tooltip-content">{{ s.service.name }}</div>
                                             </div>
                                         </li>
                                         {% endfor %}

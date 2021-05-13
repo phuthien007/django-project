@@ -7,18 +7,16 @@
     <div class="row">
         <div class="col-md-8">
             <div id="single_room_feat">
-
                 <ul>
                     {% for s in ser %}
                     <li>
                         <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"> <img src="{{ s.image.url }}" width="20%" height="20%" alt=""> </span>
-                            <div class="tooltip-content">{{ s.name }}</div>
+                            <span class="tooltip-item"> <img src="{{ s.service.image.url }}" width="20%" height="20%" alt=""> </span>
+                            <div class="tooltip-content">{{ s.service.name }}</div>
                         </div>
                     </li>
                     {% endfor %}
                 </ul>
-
             </div>
 
             <hr>
