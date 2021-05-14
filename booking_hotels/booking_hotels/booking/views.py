@@ -307,6 +307,78 @@ def cancel_booking(request):
             pass
     return  redirect('my_room')
 
+# list availble room
+@login_required(login_url='/login_user/')
+def availble_list(request):
+    if request.method == 'POST':
+        check_in_date = request.POST['check_in']
+        check_out_date = request.POST['check_out']
+        try:
+            i = format_date(check_in_date)
+            o = format_date(check_out_date)
+        except:
+            return redirect('index')
+
+        Category1 = Categories.objects.get(name='Double Room')
+        Category2 = Categories.objects.get(name='Double Room Luxury')
+        Category3 = Categories.objects.get(name='Single Room')
+        Category4 = Categories.objects.get(name='Suite Room')
+        single_lst = Category3.room_set.all()
+        double_lst = Category1.room_set.all()
+        double_luxury_lst = Category2.room_set.all()
+        suite_lst = Category4.room_set.all()
+
+        avail_room = []
+        for room in single_lst:
+            c = 0
+            booking = Booking.objects.filter(room=room)
+            for b in booking:
+                if b.departure_date >= date.today() and b.arival_date <= date.today():
+                    c += 1
+            if c == 0:
+                avail_room.append(room)
+
+        for room in double_lst:
+            c = 0
+            booking = Booking.objects.filter(room=room)
+            for b in booking:
+                if b.departure_date >= date.today() and b.arival_date <= date.today():
+                    c += 1
+            if c == 0:
+                avail_room.append(room)
+
+        for room in double_luxury_lst:
+            c = 0
+            booking = Booking.objects.filter(room=room)
+            for b in booking:
+                if b.departure_date >= date.today() and b.arival_date <= date.today():
+                    c += 1
+            if c == 0:
+                avail_room.append(room)
+
+        for room in suite_lst:
+            c = 0
+            booking = Booking.objects.filter(room=room)
+            for b in booking:
+                if b.departure_date >= date.today() and b.arival_date <= date.today():
+                    c += 1
+            if c == 0:
+                avail_room.append(room)
+        return render(request, 'detail_room/availble_room.html',
+                      {"double_room_list": avail_room, "Category": check_in_date, "ser":check_out_date,
+                       })
+
+    # Category1 = Categories.objects.get(name='Double Room')
+    # Category2 = Categories.objects.get(name='Double Room Luxury')
+    # Category3 = Categories.objects.get(name='Single Room')
+    # Category4 = Categories.objects.get(name='Suite Room')
+    # service1 = Category_service.objects.filter(category=Category1)
+    # service2 = Category_service.objects.filter(category=Category2)
+    # service3 = Category_service.objects.filter(category=Category3)
+    # service4 = Category_service.objects.filter(category=Category4)
+    # category_lst = Categories.objects.all()
+    # return render(request, 'category_room_list.html',
+    #               {"categories": category_lst, "ser1": service1, "ser2": service2, "ser3": service3, "ser4": service4})
 
 
 # admintration

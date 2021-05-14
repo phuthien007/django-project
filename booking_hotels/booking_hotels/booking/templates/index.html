@@ -2,9 +2,11 @@
 {% load static %}
 
 <body>
+{% block sub %}
+
+{% endblock %}
 
 {% block body %}
-
 {% block sub_body %}
 <div class="container margin_60_35">
     <h1 class="main_title"><em></em>Welcome to Recom <span>Hotel and Bed&amp;Breakfast</span></h1>
@@ -43,6 +45,47 @@
 </div><!-- End container -->
 
 {% endblock %}
+
+<div class="container" style="margin-top: 8%; width:100%" >
+            <div class="theiaStickySidebar">
+                <div class="box_style_1">
+                    <div id="message-booking"></div>
+                    <form method="post" action="{% url 'availble_list' %}" id="check_avail">
+                        {% csrf_token %}
+                        <input type="hidden" name="data" id="data">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Arrival date</label>
+                                    <input class="date-pick form-control" type="text" id="check_in" name="check_in"
+                                           placeholder="Check in" data-date-format="M d D" readonly>
+                                    <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Departure date</label>
+                                    <input class="date-pick form-control" type="text" id="check_out" name="check_out"
+                                           placeholder="Check out" data-date-format="M d D" readonly>
+                                    <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                                </div>
+                            </div>
+                        </div><!-- End row -->
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" id="formBooking" value="Book now"
+                                        class="btn_full"> Booking Now
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div href="#0" class=" btn_outline"> or Contact us</div>
+                    <a href="tel://yourNumber" id="phone_2"><i class="icon_set_1_icon-91"></i>Your Number</a>
+
+                </div><!-- End box_style -->
+            </div><!-- End theiaStickySidebar -->
+        </div><!-- End col -->
 
 {% for category in categories %}
 <div class="container_styled_1">
@@ -147,6 +190,46 @@
         }
     }
 });
+
+<script>
+
+  $('.carousel_in').owlCarousel({
+    center: true,
+    items:1,
+    loop:true,
+	 autoplay:true,
+	 navText: [ '', '' ],
+	addClassActive: true,
+    margin:5,
+    responsive:{
+        600:{
+            items:1
+        },
+		 1000:{
+            items:2,
+			nav:true,
+        }
+    }
+});
+
+
+
+
+
+
+</script>
+<script src="{% static 'js/theia-sticky-sidebar.js' %}"></script>
+<script>
+    jQuery('#sidebar').theiaStickySidebar({
+      additionalMarginTop: 80
+    });
+
+
+
+
+</script>
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'js/bootsrap_datepicker_func.js' %}"></script>
 
 </script>
 

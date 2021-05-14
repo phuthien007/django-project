@@ -19,6 +19,7 @@ urlpatterns = [
     path('my_profile/', profile, name='profile'),
     path('change_password/', change_password, name='change_password'),
     path('my_rooms/', my_room, name='my_room'),
+    path('availble_list',availble_list, name = 'availble_list'),
     path('booking_room/', booking_room, name='booking_room'),
     path('create_comment/', create_comment, name='create_comment'),
     path('cancel_booking/', cancel_booking, name='cancel_booking'),
