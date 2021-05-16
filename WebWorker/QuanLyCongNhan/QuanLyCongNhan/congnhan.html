@@ -1,0 +1,138 @@
+!
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Công ty CP IT12</title>
+    <link rel="shortcut icon"
+        href="https://th.bing.com/th/id/OIP.3QgEJtrYbQfyQSmjt-MDDwHaGI?w=233&h=193&c=7&o=5&dpr=1.25&pid=1.7"
+        type="image/x-icon">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/limontesweetalert2/7.2.0/sweetalert2.min.css/>" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/congnhan.css">
+</head>
+
+<body>
+    <header>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-8 col-md-9  logo-company">
+                    <img src="https://th.bing.com/th/id/OIP.3QgEJtrYbQfyQSmjt-MDDwHaGI?w=233&h=193&c=7&o=5&dpr=1.25&pid=1.7"
+                        alt="">
+                </div>
+
+                <div class="col-4 col-md-3 thong-tin">
+                    <span id="ho-ten"></span>
+                    <ul class="d-none menu-ca-nhan">
+                        <li>
+                            <button id="doi-mat-khau" class="btn btn-warning"> Đổi mật khẩu</button>
+                            
+                        </li>
+                        <li>
+                            <button id="dangxuat" class="btn btn-warning">  Đăng xuất   </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <div class="container col-12">
+            <h1 class="title">lịch làm việc</h1>
+            <div class="row">
+
+                <table class=" tables danh-sach-cong-viec">
+                    <thead class="thead-dark">
+                        <td>Tên công việc</td>
+                        <td>Nơi làm việc</td>
+                        <td>Tên giống</td>
+                        <td>Tên phân bón</td>
+                        <td>Tên thuốc</td>
+                        <td>Số lượng</td>
+                        <td>Thời gian</td>
+                        <td></td>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+                <form action="" id="tien-do-cong-viec" class="d-none tien-do-cong-viec">
+                    <h2 style="    text-align: center;
+                    margin-bottom: 17px;
+                    color: #f8f9fa;
+                    font-family: segoe-ui;
+                    font-size: 42px;">Báo cáo công việc</h2>
+                    <input type="text" class="mo-ta-trang-thai" placeholder="Mô tả trạng thái công việc " required="">
+                    <div class="tien-do">
+                        <!-- <input type="radio" class="btn btn-success btn-hoan-thanh" value="Hoàn thành">
+                        <input type="radio" class=" btn btn-warning btn-chua-hoan-thanh" value="Chưa hoàn thành"> -->
+                        <!-- Default unchecked -->
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input btn-hoan-thanh" id="defaultUnchecked"
+                                name="defaultExampleRadios">
+                            <label class="custom-control-label " style="color: white;" for="defaultUnchecked">Hoàn thành</label>
+                        </div>
+
+                        <!-- Default checked -->
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input btn-chua-hoan-thanh" id="defaultChecked"
+                                name="defaultExampleRadios" checked>
+                            <label class="custom-control-label" style="color: white;" for="defaultChecked">Chưa hoàn thành</label>
+                        </div>
+
+                    </div>
+                    <span style="color: white;">Chọn file ảnh </span>
+                    <input type="file" class="chon-anh" name="Chọn" id="file-up" accept="image/*">
+                    <img src="" id="imageFile" alt="">
+                    
+                    <br>
+                    <input type="button" class="btn btn-success btn-bao-cao" value="Báo cáo">
+
+                </form>
+
+                <form action="#" class="d-none doi-mat-khau">
+                    <h2 style="    text-align: center;
+                    margin-bottom: 17px;
+                    color: #f8f9fa;
+                    font-family: segoe-ui;
+                    font-size: 42px;">Đổi mật khẩu</h2>
+                    <input type="password" id="mat-khau-cu" class="input-thong-tin" placeholder="Mật khẩu cũ">
+                    <br>
+                    <input type="password" id="mat-khau-moi" class="input-thong-tin" placeholder="Mật khẩu mới">
+                    <br>
+                    <input type="password" id="nhap-lai-mat-khau" class="input-thong-tin" placeholder="Nhập lại mật khẩu mới">
+                    <br>
+                    <input type="button" id="btn-doi-mat-khau" class="btn btn-success btn-bao-cao" value="Gửi">
+
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="js/app_cost.js"></script>
+    <script src="js/congnhan.js"></script>
+</body>
+
+</html>

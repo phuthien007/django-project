@@ -109,7 +109,7 @@ class tb_congnhan_congviec(models.Model):
     class Meta:
         db_table = 'congnhan_congviec'
     def __str__(self):
-        return "ten cong nhan: " + self.congnhan.user.username + +" ten cong viec: "+self.congviec.ten
+        return "ten cong nhan: " + self.congnhan.user.username +" ten cong viec: "+self.congviec.ten
 
 
 class tb_baocao(models.Model):

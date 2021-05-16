@@ -143,9 +143,11 @@ def gui_bao_cao(request):
         ima.write(base64.b64decode(hinhanh))
         cn_cv = tb_congnhan_congviec.objects.filter(congnhan=congnhan, congviec=cv).first()
         # print(cn_cv)
-        bc = tb_baocao(trangthai=trangthai, mota=mota, congnhan_congviec=cn_cv)
+        bc = tb_baocao(trangthai=trangthai, mota=mota,hinh=str('images/baocao/' + filename), congnhan_congviec=cn_cv)
+        print(bc.hinh)
         bc.save()
+        # print(ima.url)
         return Response(data={"message": "success"}, status=status.HTTP_201_CREATED)
     except Exception as e:
-        # print(e)
+        print(e)
         return Response(data={"message": "something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
