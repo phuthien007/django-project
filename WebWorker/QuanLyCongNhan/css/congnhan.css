@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li,
+a {
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    position: relative;
+    background-image: url("https://th.bing.com/th/id/R5b04f1df7d6646479ee0f179763a8a90?rik=47U9L1KqNrDFnA&pid=ImgRaw");
+    background-size: cover;
+  
+}
+
+header {
+  
+}
+header .ho-ten {
+    text-align: center;
+    font-family: segoe-ui;
+    font-size: 38px;
+}
+
+header .logo-company {}
+
+.logo-company>img {
+    width: 123px;
+    height: 156px;
+}
+
+header .thong-tin {
+    text-align: center;
+    padding-top: 20px;
+}
+.thong-tin span{
+    font-size: 20px;
+    font-family: segoe-ui;
+    color: forestgreen;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #ffbc0059;
+    border-radius: 75px;
+}
+
+.thong-tin .menu-ca-nhan{
+    width: 60%;
+    margin: auto;
+}
+.menu-ca-nhan li{}
+.menu-ca-nhan a{
+    text-decoration: none;
+}
+
+.dang-xuat>a {
+    text-decoration: none;
+    color: #e9ecef;
+    border: solid 1px #728000;
+    background: #150c60ab;
+    padding: 7px 10px;
+    border-radius: 12px;
+    box-shadow: 4px 5px 5px #29721c;
+}
+
+main {
+   
+}
+
+
+
+main .title {
+    text-align: center;
+    font-family: segoe-ui;
+    text-transform: uppercase;
+    font-size: 40px;
+    letter-spacing: 10px;
+}
+
+.danh-sach-cong-viec {
+    text-align: center;
+    margin: auto;
+    border: 1px solid black;
+}
+
+.danh-sach-cong-viec thead {}
+
+.danh-sach-cong-viec td {
+    padding: 10px 20px;
+    border: 1px solid black;
+}
+
+.danh-sach-cong-viec tbody {}
+
+.danh-sach-cong-viec tr {}
+
+.danh-sach-cong-viec td button {}
+
+.danh-sach-cong-viec tbody .tien-do-cong-viec {}
+
+.tien-do-cong-viec {
+    position: absolute;
+    background: #3542dccf;
+    margin: auto;
+    padding: 50px 50px;
+    top: 27%;
+    left: 34%;
+}
+
+.tien-do-cong-viec .mo-ta-trang-thai {
+  
+    padding: 10px 95px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 21px;
+    text-align: center;
+}
+
+.tien-do-cong-viec .tien-do {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tien-do .btn-hoan-thanh {}
+
+.tien-do .btn-chua-hoan-thanh {}
+
+.tien-do-cong-viec .chon-anh {
+}
+
+.tien-do-cong-viec .btn-bao-cao {
+    margin-top: 20px;
+    margin-left: 134px;
+}
+
+.doi-mat-khau{
+    position: absolute;
+    background: #3542dccf;
+    margin: auto;
+    padding: 50px 50px;
+    top: 27%;
+    left: 34%;
+
+}
+
+.doi-mat-khau .input-thong-tin {
+  
+    padding: 10px 95px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 21px;
+    text-align: center;
+}
+.doi-mat-khau .btn-bao-cao {
+    margin-top: 20px;
+    margin-left: 134px;
+}
